@@ -1,0 +1,1 @@
+ASK_AUTH_METHOD, RECEIVE_DATA = range(2)
