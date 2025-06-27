@@ -3,10 +3,13 @@ import json
 USERS_FILE = "users.json"
 
 def save_user(telegram_id, full_name, bin_number=None, phone_number=None):
+    print("[DEBUG] save_user() вызван")
+
     try:
         with open(USERS_FILE, "r") as f:
-            users = json.load(f)
-    except FileNotFoundError:
+            content = f.read().strip()
+            users = json.loads(content) if content else {}
+    except (FileNotFoundError, json.JSONDecodeError):
         users = {}
 
     users[str(telegram_id)] = {
@@ -15,8 +18,11 @@ def save_user(telegram_id, full_name, bin_number=None, phone_number=None):
         "phone": phone_number
     }
 
+    print("[DEBUG] Сохраняем в файл:", users)
+
     with open(USERS_FILE, "w") as f:
         json.dump(users, f, indent=4)
+        print("[DEBUG] Данные записаны.")
 
 def get_user_data(telegram_id):
     try:

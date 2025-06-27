@@ -1,6 +1,6 @@
 ADMINS = [
-    123456789, 
-    987654321
+    5284411734,
+    750954104
 ]
 
 def is_admin(user_id: int) -> bool:
