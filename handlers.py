@@ -1,3 +1,4 @@
+from admin import notify_admins
 from telegram import (
     Update, KeyboardButton, ReplyKeyboardMarkup
 )
@@ -72,6 +73,7 @@ async def ask_for_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return ASK_AUTH_METHOD
 
         save_user(telegram_id, full_name, phone_number=phone)
+        await notify_admins(context, full_name, telegram_id, phone=phone)
         await message.reply_text("✅ Спасибо! Вы успешно авторизованы.")
         await message.reply_text("ℹ️ *Доступные команды:*\n/status — статус\n/reset — сброс", parse_mode="Markdown")
         return ConversationHandler.END
@@ -111,12 +113,14 @@ async def receive_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text("❌ Неверный формат номера. Введите +77XXXXXXXXX:")
             return RECEIVE_DATA
         save_user(telegram_id, full_name, phone_number=user_input)
+        await notify_admins(context, full_name, telegram_id, phone=user_input)
 
     elif auth_method == "bin":
         if not is_valid_bin(user_input):
             await update.message.reply_text("❌ БИН должен содержать 12 цифр.")
             return RECEIVE_DATA
         save_user(telegram_id, full_name, bin_number=user_input)
+        await notify_admins(context, full_name, telegram_id, bin_code=user_input)
 
     await update.message.reply_text("✅ Спасибо! Вы успешно авторизованы.")
     await update.message.reply_text("ℹ️ *Доступные команды:*\n/status — статус\n/reset — сброс", parse_mode="Markdown")
