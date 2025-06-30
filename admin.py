@@ -9,7 +9,7 @@ def is_admin(user_id: int) -> bool:
 
 async def notify_admins(context, full_name, telegram_id, phone=None, bin_code=None):
     parts = [
-        "📥 *Новая заявка на авторизацию*\n",
+        "📥 *Новая заявка*\n",
         f"👤 Имя: {full_name}",
         f"🆔 Telegram ID: {telegram_id}",
     ]

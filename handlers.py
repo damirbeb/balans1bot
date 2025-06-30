@@ -33,7 +33,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     if user_is_authenticated(telegram_id):
-        await update.message.reply_text("Вы уже авторизованы ✅", reply_markup=reply_markup)
+        await update.message.reply_text("Вы уже авторизованы ✅\nВыберите одну из доступных комманд.", reply_markup=reply_markup)
     else:
         await update.message.reply_text("Вы не авторизованы.\nВыберите способ авторизации:", reply_markup=reply_markup)
 
