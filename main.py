@@ -3,7 +3,7 @@ from telegram.ext import (
 )
 from config import BOT_TOKEN
 from handlers import (
-    start, ask_for_input, receive_data,
+    start, ask_for_input, receive_data, handle_main_menu,
     status_command, reset_command, cancel
 )
 from states import ASK_AUTH_METHOD, RECEIVE_DATA
@@ -21,6 +21,10 @@ if __name__ == "__main__":
     )
 
     app.add_handler(conv_handler)
+    app.add_handler(MessageHandler(
+        filters.TEXT & (~filters.COMMAND),
+        handle_main_menu
+    ))
     app.add_handler(CommandHandler("status", status_command))
     app.add_handler(CommandHandler("reset", reset_command))
 
