@@ -1,2 +1,2 @@
-users.json
-confing.py
+data/users.json
+core/config.py

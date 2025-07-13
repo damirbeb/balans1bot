@@ -1,16 +1,16 @@
-from admin import notify_admins
+from core.admin import notify_admins
 from telegram import (
     Update, KeyboardButton, ReplyKeyboardMarkup
 )
 from telegram.ext import (
-    ContextTypes, ConversationHandler, MessageHandler, filters
+    ContextTypes, ConversationHandler
 )
-from validation import is_valid_phone, is_valid_bin
-from storage import (
+from core.validation import is_valid_phone, is_valid_bin
+from core.storage import (
     save_user, get_user_data,
     remove_user, user_is_authenticated
 )
-from states import ASK_AUTH_METHOD, RECEIVE_DATA
+from core.states import ASK_AUTH_METHOD, RECEIVE_DATA
 
 reply_markup_auth = ReplyKeyboardMarkup(
     [

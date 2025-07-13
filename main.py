@@ -1,12 +1,12 @@
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, ConversationHandler, MessageHandler, filters
 )
-from config import BOT_TOKEN
-from handlers import (
+from core.config import BOT_TOKEN
+from handlers.handlers import (
     start, ask_for_input, receive_data, handle_main_menu,
     status_command, reset_command, cancel
 )
-from states import ASK_AUTH_METHOD, RECEIVE_DATA
+from core.states import ASK_AUTH_METHOD, RECEIVE_DATA
 
 if __name__ == "__main__":
     app = ApplicationBuilder().token(BOT_TOKEN).build()
